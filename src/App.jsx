@@ -122,7 +122,7 @@ const App = () => {
               />
             )}
             <Routes>
-              <Route path="/" element={<Layout />}>
+              <Route path="/" element={auth ? <Layout /> : <Login />}>
                 <Route index element={<LandingPage />} />
                 <Route path="about" element={<About />} />
                 <Route path="features" element={<Feature />} />
@@ -139,88 +139,7 @@ const App = () => {
                   path="signup"
                   element={auth ? <LandingPage /> : <Signup />}
                 />
-                <Route
-                  path="verify-email"
-                  element={auth ? <LandingPage /> : <VerifyEmailPage />}
-                />
-                <Route
-                  path="forget-password"
-                  element={auth ? <LandingPage /> : <ForgetPasswordPage />}
-                />
-                <Route
-                  path="/reset-password/:token"
-                  element={auth ? <LandingPage /> : <ResetPasswordPage />}
-                />
 
-                <Route
-                  path="dashboard"
-                  element={auth ? <Dashboard1 /> : <Login />}
-                />
-                <Route
-                  path="dailytask"
-                  element={auth ? <DailyTask /> : <Login />}
-                />
-                <Route
-                  path="weekly"
-                  element={auth ? <WeeklyTask /> : <Login />}
-                />
-                <Route
-                  path="monthly"
-                  element={auth ? <MonthlyTask /> : <Login />}
-                />
-                <Route
-                  path="yearly"
-                  element={auth ? <YearlyTask /> : <Login />}
-                />
-                <Route
-                  path="time-management"
-                  element={auth ? <TimeManage /> : <Login />}
-                />
-                <Route
-                  path="Motivation-Quotes"
-                  element={auth ? <Motivation /> : <Login />}
-                />
-                <Route
-                  path="notes"
-                  element={auth ? <StickyNotes /> : <Login />}
-                />
-                <Route
-                  path="taskchart"
-                  element={auth ? <TaskChart /> : <Login />}
-                />
-                <Route
-                  path="rankings"
-                  element={auth ? <Ranking /> : <Login />}
-                />
-                <Route
-                  path="completed-task"
-                  element={auth ? <CompletedTask /> : <Login />}
-                />
-                <Route
-                  path="overdue-task"
-                  element={auth ? <OverdueTask /> : <Login />}
-                />
-                <Route
-                  path="coupons"
-                  element={auth ? <Coupons /> : <Login />}
-                />
-                <Route
-                  path="reminders"
-                  element={auth ? <Reminders /> : <Login />}
-                />
-
-                <Route
-                  path="coupons/normal"
-                  element={auth ? <NormalCoinConvert /> : <Login />}
-                />
-                <Route
-                  path="coupons/gold"
-                  element={auth ? <GoldCoinConvert /> : <Login />}
-                />
-                <Route
-                  path="coupons/elite"
-                  element={auth ? <EliteCoinConvert /> : <Login />}
-                />
                 <Route
                   path="settings"
                   element={auth ? <Settings /> : <Login />}
