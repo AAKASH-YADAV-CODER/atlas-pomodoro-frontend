@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Components/Signup";
-import Layout from "./Components/Layout";
+import Layout from "./Pages/Layout.jsx";
 import Login from "./Components/Login";
 import { useSelector, useDispatch } from "react-redux";
-import VerifyEmailPage from "./Components/VerifyEmailPage.jsx";
-import ForgetPasswordPage from "./Components/ForgetPasswordPage.jsx";
-import ResetPasswordPage from "./ResetPasswordPage.jsx";
 import Settings from "./Components/Settings.jsx";
 import NotFound from "./Components/NotFound.jsx";
 import Feedback from "./Components/Feedback.jsx";
