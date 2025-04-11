@@ -68,6 +68,7 @@ const Signup = () => {
     if (validateForm()) {
       try {
         setLoading(true);
+        // Use the full URL instead of relying on the proxy
         const response = await fetch(`/api/v1/user/signup`, {
           method: "POST",
           headers: {
@@ -77,8 +78,8 @@ const Signup = () => {
         });
 
         const data = await response.json();
-
         if (!response.ok) {
+          // Display the specific error message from the server
           throw new Error(data.message || "Error registering user");
         }
 
@@ -88,7 +89,23 @@ const Signup = () => {
         navigate("/login");
       } catch (error) {
         console.error("Error during registration:", error.message);
-        toast.error(error.message || "Error registering user");
+
+        // Display a more user-friendly error message
+        if (error.message.includes("phone")) {
+          setErrors((prev) => ({
+            ...prev,
+            phone: "This phone number is already registered",
+          }));
+          toast.error("This phone number is already registered");
+        } else if (error.message.includes("email")) {
+          setErrors((prev) => ({
+            ...prev,
+            email: "This email is already registered",
+          }));
+          toast.error("This email is already registered");
+        } else {
+          toast.error(error.message || "Error registering user");
+        }
       } finally {
         setLoading(false);
       }
