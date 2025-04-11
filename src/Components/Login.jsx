@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setLoggedInUser } from "../store/user-slice";
+import { getApiUrl } from "../utils/apiConfig";
 // import { signInWithPopup } from "firebase/auth";
 // import { auth, googleProvider } from "../utils/firebase.js";
 import { Loader } from "lucide-react";
@@ -27,7 +28,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`/api/v1/user/login`, {
+      const response = await fetch(getApiUrl(`/api/v1/user/login`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +69,7 @@ const Login = () => {
   //     const result = await signInWithPopup(auth, googleProvider);
   //     const user = result.user;
   //     // Send to backend for token generation
-  //     const response = await fetch(`/api/v1/user/google-auth`, {
+  //     const response = await fetch(getApiUrl(`/api/v1/user/google-auth`), {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",

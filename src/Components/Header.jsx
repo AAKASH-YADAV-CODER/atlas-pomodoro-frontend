@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInUser } from "../store/user-slice";
 import { TypeAnimation } from "react-type-animation";
+import { getApiUrl } from "../utils/apiConfig";
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -18,7 +19,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`/api/v1/user/logout`, {
+      const res = await fetch(getApiUrl(`/api/v1/user/logout`), {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

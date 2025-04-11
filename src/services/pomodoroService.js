@@ -3,13 +3,16 @@ const getAuthToken = () => {
   return localStorage.getItem("token");
 };
 
+// Import the API URL utility
+import { getApiUrl } from "../utils/apiConfig";
+
 // Pomodoro API service
 const pomodoroService = {
   // Create a new pomodoro task
   createpomodoros: async (taskData) => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro`, {
+      const response = await fetch(getApiUrl(`/api/v1/pomodoro`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +44,7 @@ const pomodoroService = {
   getAllpomodoros: async () => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro`, {
+      const response = await fetch(getApiUrl(`/api/v1/pomodoro`), {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -71,7 +74,7 @@ const pomodoroService = {
   getAllpomodorosPoints: async () => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro/points`, {
+      const response = await fetch(getApiUrl(`/api/v1/pomodoro/points`), {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -101,7 +104,7 @@ const pomodoroService = {
   deletepomodoros: async (id) => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro/${id}`, {
+      const response = await fetch(getApiUrl(`/api/v1/pomodoro/${id}`), {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -131,12 +134,15 @@ const pomodoroService = {
   markAsCompleted: async (id) => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro/${id}/complete`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        getApiUrl(`/api/v1/pomodoro/${id}/complete`),
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const res = await response.json();
 
@@ -161,14 +167,17 @@ const pomodoroService = {
   updateDeadline: async (id, deadline) => {
     const token = getAuthToken();
     try {
-      const response = await fetch(`/api/v1/pomodoro/${id}/deadline`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ deadline }),
-      });
+      const response = await fetch(
+        getApiUrl(`/api/v1/pomodoro/${id}/deadline`),
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ deadline }),
+        }
+      );
 
       const res = await response.json();
 

@@ -4,6 +4,8 @@ import { User, Mail, Lock, Phone } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loader } from "lucide-react";
+import { getApiUrl } from "../utils/apiConfig";
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -69,7 +71,7 @@ const Signup = () => {
       try {
         setLoading(true);
         // Use the full URL instead of relying on the proxy
-        const response = await fetch(`/api/v1/user/signup`, {
+        const response = await fetch(getApiUrl(`/api/v1/user/signup`), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

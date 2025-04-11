@@ -1,4 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getApiUrl } from "../utils/apiConfig";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const getAuthToken = () => {
   return localStorage.getItem("token");
 };
@@ -6,7 +10,7 @@ const getAuthToken = () => {
 // Async actions
 export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
   const token = getAuthToken();
-  const response = await fetch(`/api/v1/user/users`, {
+  const response = await fetch(getApiUrl(`/api/v1/user/users`), {
     headers: {
       Authorization: `Bearer ${token}`,
     },
