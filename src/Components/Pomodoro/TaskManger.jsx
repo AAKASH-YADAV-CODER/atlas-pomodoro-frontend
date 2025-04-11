@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import pomodoroService from "../../../services/pomodoroService";
+import pomodoroService from "../../services/pomodoroService.js";
 import { toast } from "react-toastify";
 
 function TaskManagerComponent({

@@ -93,9 +93,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow">
-        <h2 className="mb-6 text-2xl font-bold text-center">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48L2c+PC9zdmc+')] opacity-20 animate-pulse"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+      <div className="w-full max-w-md p-8 bg-white/10 backdrop-blur-md rounded-xl shadow-2xl relative z-10">
+        <h2 className="mb-6 text-2xl font-bold text-center text-white">
           Create an Account
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -107,7 +109,7 @@ const Signup = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="w-full px-4 py-2 border rounded-md"
+              className="w-full px-4 py-2 border border-white/20 bg-white/10 backdrop-blur-sm rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.name && <p className="text-red-500">{errors.name}</p>}
           </div>
@@ -119,7 +121,7 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="w-full px-4 py-2 border rounded-md"
+              className="w-full px-4 py-2 border border-white/20 bg-white/10 backdrop-blur-sm rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.email && <p className="text-red-500">{errors.email}</p>}
           </div>
@@ -131,7 +133,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
-              className="w-full px-4 py-2 border rounded-md"
+              className="w-full px-4 py-2 border border-white/20 bg-white/10 backdrop-blur-sm rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {errors.password && (
@@ -145,7 +147,7 @@ const Signup = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm Password"
-              className="w-full px-4 py-2 border rounded-md"
+              className="w-full px-4 py-2 border border-white/20 bg-white/10 backdrop-blur-sm rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {errors.confirmPassword && (
@@ -159,7 +161,7 @@ const Signup = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="w-full px-4 py-2 border rounded-md"
+              className="w-full px-4 py-2 border border-white/20 bg-white/10 backdrop-blur-sm rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {errors.phone && <p className="text-red-500 pl-3">{errors.phone}</p>}
@@ -167,17 +169,17 @@ const Signup = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            className="w-full px-4 py-2 text-white bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 animate-gradient-x hover:shadow-[0_0_15px_rgba(255,0,0,0.5)] transition-all duration-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           >
             {loading ? (
-              <Loader className="w-6 h-6 text-white  animate-spin mx-auto" />
+              <Loader className="w-6 h-6 text-white animate-spin mx-auto" />
             ) : (
               "Register"
             )}
           </button>
           <Link
             to="/login"
-            className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="w-full flex items-center justify-center py-2 px-4 border border-white/20 rounded-md shadow-sm text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Already have an account? Login
           </Link>

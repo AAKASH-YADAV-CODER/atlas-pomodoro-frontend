@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import TimerComponent from "./Timer";
 import TaskManagerComponent from "./TaskManger";
 import GamificationComponent from "./Gamfication";
-import pomodoroService from "../../../services/pomodoroService";
+import pomodoroService from "../../services/pomodoroService";
 import { toast } from "react-toastify";
 
 import { Info, Star } from "lucide-react";

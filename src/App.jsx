@@ -9,6 +9,7 @@ import NotFound from "./Components/NotFound.jsx";
 import Feedback from "./Components/Feedback.jsx";
 import { toast } from "react-toastify";
 import { fetchUsers, setLoggedInUser } from "./store/user-slice";
+import Pomodoro from "./Components/Pomodoro/Pomodoro.jsx";
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
   const hasShownFeedback = useRef(false);
@@ -125,8 +126,8 @@ const App = () => {
               <Route path="login" element={auth ? <Layout /> : <Login />} />
               <Route path="signup" element={auth ? <Layout /> : <Signup />} />
               <Route path="/" element={auth ? <Layout /> : <Login />}>
-                <Route index element={<Layout />} />
-                <Route path="about" element={<About />} />
+                <Route index element={<Pomodoro />} />
+                <Route path="about" element={auth ? <About /> : <Login />} />
                 <Route
                   path="settings"
                   element={auth ? <Settings /> : <Login />}

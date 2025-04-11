@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Components/Header";
+import Header from "../Components/Header";
 import "./Layout.css";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -25,11 +25,51 @@ const Layout = () => {
     }
   }, [socket, auth]);
 
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "About Pomodoro", path: "/about" },
+    { label: "Setting", path: "/setting" },
+  ];
+
   return (
     <>
       <Header />
       <div className="flex flex-row min-h-screen">
         <div className="flex-1 flex flex-col">
+          <div className="flex items-center space-x-8">
+            {navItems.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-400"
+                    : "hover:text-violet-400 transition"
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            {auth ? (
+              <button
+                onClick={handleLogout}
+                className="hover:text-violet-400 transition cursor-pointer"
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-400"
+                    : "hover:text-violet-400 transition"
+                }
+              >
+                Login
+              </NavLink>
+            )}
+          </div>
           <main className="flex-1 relative p-4 lg:ml-64 top-14">
             <Outlet />
           </main>

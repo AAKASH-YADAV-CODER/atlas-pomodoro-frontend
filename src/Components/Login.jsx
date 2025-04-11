@@ -100,14 +100,12 @@ const Login = () => {
   // };
 
   return (
-    <div className="flex-1 relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="max-w-md w-full ">
-        {" "}
-        {/* Changed space-y-8 to space-y-6 */}
+    <div className="flex-1 relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48L2c+PC9zdmc+')] opacity-20 animate-pulse"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+      <div className="max-w-md w-full relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl">
         <div>
-          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-            {" "}
-            {/* Changed mt-6 to mt-2 */}
+          <h2 className="mt-2 text-center text-3xl font-extrabold text-white">
             Sign in to your account
           </h2>
         </div>
@@ -127,7 +125,7 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-white/20 bg-white/10 backdrop-blur-sm placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -148,7 +146,7 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-white/20 bg-white/10 backdrop-blur-sm placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -157,25 +155,14 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="text-sm">
-              <a
-                href="/forget-password"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
           <div>
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 animate-gradient-x hover:shadow-[0_0_15px_rgba(255,0,0,0.5)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
               {loading ? (
-                <Loader className="w-6 h-6 text-white  animate-spin mx-auto" />
+                <Loader className="w-6 h-6 text-white animate-spin mx-auto" />
               ) : (
                 " Sign in"
               )}
@@ -203,11 +190,11 @@ const Login = () => {
             </button>
           </div>
         </div> */}
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-white">
           Don't have an account?{" "}
           <a
             href="/signup"
-            className="underline transition duration-200 ease-in-out text-[#6C3483] hover:text-indigo-600 focus:text-indigo-600"
+            className="underline transition duration-200 ease-in-out text-blue-300 hover:text-blue-200 focus:text-blue-200"
           >
             Sign Up
           </a>
