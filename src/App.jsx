@@ -122,24 +122,11 @@ const App = () => {
               />
             )}
             <Routes>
+              <Route path="login" element={auth ? <Layout /> : <Login />} />
+              <Route path="signup" element={auth ? <Layout /> : <Signup />} />
               <Route path="/" element={auth ? <Layout /> : <Login />}>
-                <Route index element={<LandingPage />} />
+                <Route index element={<Layout />} />
                 <Route path="about" element={<About />} />
-                <Route path="features" element={<Feature />} />
-                <Route
-                  path="pricing"
-                  element={auth ? <Subscription /> : <Login />}
-                />
-                <Route path="contact" element={<ContactUs />} />
-                <Route
-                  path="login"
-                  element={auth ? <LandingPage /> : <Login />}
-                />
-                <Route
-                  path="signup"
-                  element={auth ? <LandingPage /> : <Signup />}
-                />
-
                 <Route
                   path="settings"
                   element={auth ? <Settings /> : <Login />}
