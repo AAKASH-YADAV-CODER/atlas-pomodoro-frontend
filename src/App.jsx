@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Components/Signup";
 import Layout from "./Pages/Layout.jsx";
@@ -6,15 +6,12 @@ import Login from "./Components/Login";
 import { useSelector, useDispatch } from "react-redux";
 import Settings from "./Components/Settings.jsx";
 import NotFound from "./Components/NotFound.jsx";
-import Feedback from "./Components/Feedback.jsx";
 import { toast } from "react-toastify";
 import { fetchUsers, setLoggedInUser } from "./store/user-slice";
 import Pomodoro from "./Components/Pomodoro/Pomodoro.jsx";
+import InfoModal from "./Components/About.jsx";
 const App = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const hasShownFeedback = useRef(false);
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.users);
   const auth = useSelector((state) => state.user.loggedInUser);
 
   useEffect(() => {
@@ -22,53 +19,6 @@ const App = () => {
       dispatch(fetchUsers());
     }
   }, [auth, dispatch]);
-
-  //This gives the updated user's data which is currently logged In
-  const userFeedback = users.find((user) => user._id === auth._id);
-
-  //here if user have not given feedback then after 10 sec it will show the feedback popup
-  useEffect(() => {
-    // Reset the flag when user logs out
-    if (!auth) {
-      hasShownFeedback.current = false;
-      return;
-    }
-
-    if (userFeedback !== undefined && !hasShownFeedback.current) {
-      const timer = setTimeout(() => {
-        if (!userFeedback?.isFeedback) {
-          setShowPopup(true);
-          hasShownFeedback.current = true;
-        }
-      }, 10000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [userFeedback, auth]); // Only dependencies trigger the effect.
-
-  //This function will send the feedback to the backend
-  const handleSubmitFeedback = async (feedbackdata) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("/api/v1/send-feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(feedbackdata),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error);
-      }
-      setShowPopup(false);
-    } catch (error) {
-      toast.error("Failed to send feedback.");
-      console.error("Error:", error);
-    }
-  };
 
   const checkAuth = async () => {
     try {
@@ -116,18 +66,16 @@ const App = () => {
         <div className="flex">
           <div className="flex-grow">
             {/* Your existing content */}
-            {showPopup && (
-              <Feedback
-                onClose={() => setShowPopup(false)}
-                onSubmit={handleSubmitFeedback}
-              />
-            )}
+
             <Routes>
               <Route path="login" element={auth ? <Layout /> : <Login />} />
               <Route path="signup" element={auth ? <Layout /> : <Signup />} />
               <Route path="/" element={auth ? <Layout /> : <Login />}>
                 <Route index element={<Pomodoro />} />
-                <Route path="about" element={auth ? <About /> : <Login />} />
+                <Route
+                  path="about"
+                  element={auth ? <InfoModal /> : <Login />}
+                />
                 <Route
                   path="settings"
                   element={auth ? <Settings /> : <Login />}

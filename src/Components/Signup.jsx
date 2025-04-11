@@ -81,11 +81,14 @@ const Signup = () => {
         if (!response.ok) {
           throw new Error(data.message || "Error registering user");
         }
+
+        // Success case
+        toast.success("Registration successful! Please login.");
         setLoading(false);
-        navigate("/verify-email");
+        navigate("/login");
       } catch (error) {
         console.error("Error during registration:", error.message);
-        toast.error("Error registering user try google login");
+        toast.error(error.message || "Error registering user");
       } finally {
         setLoading(false);
       }

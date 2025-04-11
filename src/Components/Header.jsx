@@ -4,13 +4,13 @@ import { Menu, X } from "lucide-react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInUser } from "../store/user-slice";
+import { TypeAnimation } from "react-type-animation";
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.user.loggedInUser);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -44,39 +44,28 @@ const Header = () => {
     }
   }, []);
 
-  const navItems = [
-    { label: "Home", path: "/" },
-    { label: "About Us", path: "/about" },
-    { label: "Features", path: "/features" },
-    { label: "Pricing", path: "/pricing" },
-    { label: "Contact Us", path: "/contact" },
-  ];
-
   return (
-    <nav className="bg-purple-800 text-white fixed top-0 z-40 w-full">
-      <div className="container mx-auto px-4 py-3 ">
+    <nav className="bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white fixed top-0 z-40 w-full shadow-lg">
+      <div className="container mx-auto px-4 py-3 backdrop-blur-sm bg-opacity-90">
         {/* Desktop Navigation */}
         <div className="flex justify-between items-center">
           {/* Branding */}
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold ml-2 pt-2 ">SOWALNK</div>
+            <div className="text-2xl font-bold ml-2 pt-2 italic">
+              {auth && (
+                <TypeAnimation
+                  sequence={["HI " + auth.name.toUpperCase(), 1000, "", 500]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                  cursor={true}
+                />
+              )}
+            </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-violet-400"
-                    : "hover:text-violet-400 transition"
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
             {auth ? (
               <button
                 onClick={handleLogout}
@@ -120,22 +109,6 @@ const Header = () => {
           }`}
         >
           <div className="pt-4 pb-3 space-y-3">
-            {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.path}
-                className={({ isActive }) =>
-                  `block py-2 px-4 rounded ${
-                    isActive
-                      ? "text-violet-400 bg-purple-700"
-                      : "hover:bg-purple-700 hover:text-violet-400 transition"
-                  }`
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </NavLink>
-            ))}
             {auth ? (
               <button
                 onClick={handleLogout}

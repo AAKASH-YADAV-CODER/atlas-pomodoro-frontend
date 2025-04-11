@@ -15,6 +15,7 @@ import { motion, animate } from "framer-motion";
 import { fetchUsers } from "../store/user-slice";
 import { Loader } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 const CountUp = ({ value, duration = 2, className = "" }) => {
   const [displayValue, setDisplayValue] = useState(0);
 
@@ -83,15 +84,15 @@ const Settings = () => {
       variants={item}
       whileHover={{ scale: 1.02 }}
       onClick={onClick}
-      className={`bg-white rounded-xl p-6 shadow-sm backdrop-blur-sm bg-opacity-90 ${className}`}
+      className={`bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${className}`}
     >
       <div className="flex items-center gap-4">
-        <div className="p-3 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100">
-          <Icon className="w-6 h-6 text-gray-700" />
+        <div className="p-3 rounded-lg bg-gradient-to-br from-purple-100 to-indigo-100">
+          <Icon className="w-6 h-6 text-purple-600" />
         </div>
         <div>
           <p className="text-sm text-gray-500">{title}</p>
-          <p className="text-xl font-semibold text-gray-900">
+          <p className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
             {prefix}
             {isNumber ? <CountUp value={value} /> : value}
             {suffix}
@@ -103,8 +104,10 @@ const Settings = () => {
 
   if (isLoading || !auth) {
     return (
-      <Loader className="w-10 h-10 text-purple-700  animate-spin mx-auto" />
-    ); // Show a loading spinner while data is being fetched
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader className="w-10 h-10 text-purple-600 animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -112,12 +115,12 @@ const Settings = () => {
       initial="hidden"
       animate="show"
       variants={container}
-      className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8"
+      className="w-full max-w-7xl mx-auto px-4 py-8"
     >
       {/* Profile Header */}
       <motion.div
         variants={item}
-        className="bg-white rounded-2xl p-8 mb-8 shadow-lg backdrop-blur-sm bg-opacity-90 border border-gray-100"
+        className="bg-gradient-to-br from-white to-purple-50 rounded-2xl p-8 mb-8 shadow-xl border border-purple-100"
       >
         <div className="md:flex md:items-center gap-6 place-items-center space-y-6">
           <motion.img
@@ -126,30 +129,30 @@ const Settings = () => {
               auth.name
             )}&background=random`}
             alt={auth.name}
-            className="w-24 h-24 rounded-full ring-4 ring-green-300 shadow-xl"
+            className="w-24 h-24 rounded-full ring-4 ring-purple-300 shadow-xl"
           />
           <div>
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="md:text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent"
+              className="md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent"
             >
               {auth.name}
             </motion.h1>
-            <div className="flex items-center gap-2 text-gray-500 mt-1">
+            <div className="flex items-center gap-2 text-gray-600 mt-1">
               <Mail className="w-4 h-4" />
               <span>{auth.email}</span>
             </div>
             <div className="flex items-center gap-4 mt-4">
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-green-100 to-green-200 text-green-800 shadow-sm"
+                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-800 shadow-sm"
               >
                 <Shield className="w-4 h-4 mr-1" /> Verified Account
               </motion.span>
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 shadow-sm"
+                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-800 shadow-sm"
               >
                 <Zap className="w-4 h-4 mr-1" /> {auth.authMethod} Login
               </motion.span>
@@ -168,7 +171,7 @@ const Settings = () => {
           title="Total Points"
           value={auth.totalPoints}
           isNumber={true}
-          className="border-l-4 border-blue-500"
+          className="border-l-4 border-purple-500"
           onClick={() => navigate("/rankings")}
         />
         <StatCard
@@ -177,7 +180,7 @@ const Settings = () => {
           value={auth.streak}
           isNumber={true}
           suffix=" days"
-          className="border-l-4 border-yellow-500"
+          className="border-l-4 border-indigo-500"
           onClick={() => navigate("/dashboard")}
         />
         <StatCard
@@ -185,7 +188,7 @@ const Settings = () => {
           title="Normal Coins"
           value={auth.normalCoins}
           isNumber={true}
-          className="border-l-4 border-green-500"
+          className="border-l-4 border-purple-500"
           onClick={() => navigate("/coupons")}
         />
       </motion.div>
@@ -194,9 +197,11 @@ const Settings = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <motion.div
           variants={item}
-          className="bg-white rounded-xl p-6 shadow-lg backdrop-blur-sm bg-opacity-90 border border-gray-100"
+          className="bg-gradient-to-br from-white to-purple-50 rounded-xl p-6 shadow-lg border border-purple-100"
         >
-          <h2 className="text-xl font-semibold mb-4">Points Breakdown</h2>
+          <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            Points Breakdown
+          </h2>
           <div className="space-y-4">
             <motion.div
               initial={{ width: 0 }}
@@ -229,7 +234,7 @@ const Settings = () => {
                   }%`,
                 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="h-2 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"
+                className="h-2 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"
               />
             </div>
           </div>
@@ -237,41 +242,47 @@ const Settings = () => {
 
         <motion.div
           variants={item}
-          className="bg-white rounded-xl p-6 shadow-lg backdrop-blur-sm bg-opacity-90 border border-gray-100"
+          className="bg-gradient-to-br from-white to-indigo-50 rounded-xl p-6 shadow-lg border border-indigo-100"
         >
-          <h2 className="text-xl font-semibold mb-4">Account Activity</h2>
+          <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Account Activity
+          </h2>
           <div className="space-y-4">
             <motion.div
               whileHover={{ x: 5 }}
-              className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex justify-between items-center p-2 hover:bg-purple-50 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-gray-500" />
+                <Calendar className="w-5 h-5 text-purple-500" />
                 <span className="text-gray-600">Last Task Completed</span>
               </div>
-              <span className="font-medium">
+              <span className="font-medium text-purple-600">
                 {formatDate(auth.lastTaskDate)}
               </span>
             </motion.div>
             <motion.div
               whileHover={{ x: 5 }}
-              className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex justify-between items-center p-2 hover:bg-purple-50 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-gray-500" />
+                <Clock className="w-5 h-5 text-purple-500" />
                 <span className="text-gray-600">Last Login</span>
               </div>
-              <span className="font-medium">{formatDate(auth.lastLogin)}</span>
+              <span className="font-medium text-purple-600">
+                {formatDate(auth.lastLogin)}
+              </span>
             </motion.div>
             <motion.div
               whileHover={{ x: 5 }}
-              className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex justify-between items-center p-2 hover:bg-purple-50 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-2">
-                <User className="w-5 h-5 text-gray-500" />
+                <User className="w-5 h-5 text-purple-500" />
                 <span className="text-gray-600">Member Since</span>
               </div>
-              <span className="font-medium">{formatDate(auth.createdAt)}</span>
+              <span className="font-medium text-purple-600">
+                {formatDate(auth.createdAt)}
+              </span>
             </motion.div>
           </div>
         </motion.div>
